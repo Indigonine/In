@@ -76,8 +76,7 @@ jobs:
         name: node-app
         path: .
 
-        [![.github/workflows/azure-webapps-node.yml](https://github.com/Indigonine/In/actions/workflows/azure-webapps-node.yml/badge.svg?branch=main&event=deployment_status)](https://github.com/Indigonine/In/actions/workflows/azure-webapps-node.yml)
-
+    
   deploy:
     permissions:
       contents: none
