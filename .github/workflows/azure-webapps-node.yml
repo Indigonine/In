@@ -6,6 +6,7 @@
 # To configure this workflow:
 #
 # 1. Download the Publish Profile for your Azure Web App. You can download this file from the Overview page of your Web App in the Azure Portal.
+
 #    For more information: https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel#generate-deployment-credentials
 #
 # 2. Create a secret in your repository named AZURE_WEBAPP_PUBLISH_PROFILE, paste the publish profile contents as the value of the secret.
@@ -16,7 +17,28 @@
 # For more information on GitHub Actions for Azure: https://github.com/Azure/Actions
 # For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
+            - ชื่อ: อัปโหลดสิ่งประดิษฐ์ที่สร้างขึ้น
+  การใช้งาน: actions/upload-artifact@v3.2.1-node20
+  กับ:
+    # ชื่อสิ่งประดิษฐ์
+    ชื่อ: # ตัวเลือก ค่าเริ่มต้นคือสิ่งประดิษฐ์
+    # ไฟล์ ไดเรกทอรี หรือรูปแบบไวด์การ์ดที่อธิบายถึงสิ่งที่จะอัปโหลด
+    เส้นทาง:
+    # พฤติกรรมที่ต้องการหากไม่พบไฟล์จากเส้นทางที่ให้มา
+ตัวเลือกที่มี:
+  warn: แสดงคำเตือนแต่ไม่ล้มเหลวในการดำเนินการ
+  ข้อผิดพลาด: การดำเนินการล้มเหลวโดยมีข้อความแสดงข้อผิดพลาด
+  ไม่สนใจ: ไม่แสดงคำเตือนหรือข้อผิดพลาดใด ๆ การกระทำจะไม่ล้มเหลว
 
+    if-no-files-found: # ตัวเลือก ค่าเริ่มต้นคือ warn
+    # ระยะเวลาที่สิ่งประดิษฐ์จะหมดอายุเป็นวัน 0 หมายถึงใช้การคงไว้เป็นค่าเริ่มต้น
+ขั้นต่ำ 1 วัน สูงสุด 90 วัน เว้นแต่จะเปลี่ยนแปลงจากหน้าการตั้งค่าที่เก็บข้อมูล
+
+    วันเก็บรักษา: # ตัวเลือก
+    # หากเป็นจริง ไฟล์ที่ซ่อนอยู่จะรวมอยู่ในอาร์ทิแฟกต์ที่อัปโหลด หากเป็นเท็จ ไฟล์ที่ซ่อนอยู่จะไม่รวมอยู่ในอาร์ทิแฟกต์ที่อัปโหลด
+
+    include-hidden-files: # ตัวเลือก ค่าเริ่มต้นคือ false
+          
 on:
   push:
     branches: [ "main" ]
@@ -53,6 +75,8 @@ jobs:
       with:
         name: node-app
         path: .
+
+        [![.github/workflows/azure-webapps-node.yml](https://github.com/Indigonine/In/actions/workflows/azure-webapps-node.yml/badge.svg?branch=main&event=deployment_status)](https://github.com/Indigonine/In/actions/workflows/azure-webapps-node.yml)
 
   deploy:
     permissions:
